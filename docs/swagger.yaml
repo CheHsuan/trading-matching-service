@@ -1,0 +1,87 @@
+basePath: /api/v1
+definitions:
+  api.GeneralResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  api.placeOrderRequest:
+    properties:
+      order_kind:
+        description: |-
+          OrderKind:
+          * 1 - buy order.
+          * 2 - sell order.
+        type: integer
+      price:
+        type: number
+      price_type:
+        description: |-
+          PriceType:
+          * 1 - market price.
+          * 2 - limit price.
+        type: integer
+      quantity:
+        type: integer
+    type: object
+  api.placeOrderResponse:
+    properties:
+      order_id:
+        type: string
+    type: object
+host: localhost:9000
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is trading matching service.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Trading Matching Service API
+  version: "1.0"
+paths:
+  /orders:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Body
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/api.placeOrderRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.placeOrderResponse'
+      summary: PlaceOrder
+      tags:
+      - Order
+  /orders/{oid}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: oid
+        in: path
+        name: oid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.GeneralResponse'
+      summary: CancelOrder
+      tags:
+      - Order
+swagger: "2.0"
