@@ -61,7 +61,7 @@ func (c *Controller) PlaceOrder(w http.ResponseWriter, r *http.Request) {
 		PriceType: ordersvc.PriceType(req.PriceType),
 		Price:     req.Price,
 		Quantity:  req.Quantity,
-		CreatedAt: time.Now().Unix(),
+		CreatedAt: time.Now().UnixNano(),
 	}
 
 	if _, err := c.orderStore.CreateOrder(r.Context(), ord); err != nil {
@@ -90,7 +90,7 @@ func (c *Controller) checkPlaceOrderRequest(req *placeOrderRequest) error {
 		return errors.New("invalid quantity")
 	}
 
-	if req.PriceType == 0 || int(req.PriceType) > ordersvc.NumOfPriceType {
+	if req.PriceType != ordersvc.PriceTypeLimit && req.PriceType != ordersvc.PriceTypeMarket {
 		return errors.New("invalid price type")
 	}
 

@@ -3,7 +3,6 @@ package engine
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"time"
 
 	"trading-matching-service/pkg/engine/pqueue"
@@ -80,7 +79,7 @@ func (e *matchEngine) handleOrderCreate(ctx context.Context, msg msgsvc.Acknowle
 		return
 	}
 
-	now := time.Now().Unix()
+	now := time.Now().UnixNano()
 	_ = e.orderStore.ConfirmOrderAt(ctx, ord.ID, now)
 	ord.ConfirmedAt = now
 
@@ -93,8 +92,6 @@ func (e *matchEngine) handleOrderCreate(ctx context.Context, msg msgsvc.Acknowle
 		// not a valid order, drop it
 		return
 	}
-
-	fmt.Println(ord)
 }
 
 func (e *matchEngine) handleOrderCancel(ctx context.Context, msg msgsvc.AcknowledgementMessage) {

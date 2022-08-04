@@ -3,10 +3,9 @@ package order
 type OrderKind uint32
 
 const (
-	OrderKindNone  = OrderKind(iota)
-	OrderKindBuy   = OrderKind(iota)
-	OrderKindSell  = OrderKind(iota)
-	NumOfOrderKind = int(iota)
+	OrderKindNone = OrderKind(iota)
+	OrderKindBuy  = OrderKind(iota)
+	OrderKindSell = OrderKind(iota)
 )
 
 type PriceType uint32
@@ -15,7 +14,6 @@ const (
 	PriceTypeNone   = PriceType(iota)
 	PriceTypeMarket = PriceType(iota)
 	PriceTypeLimit  = PriceType(iota)
-	NumOfPriceType  = int(iota)
 )
 
 type Order struct {
