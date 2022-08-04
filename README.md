@@ -16,7 +16,7 @@ When the server receives a request, this request will be pushed into the message
 **Data consistency and data recoverability from server crash promised**
 Since we can choose another more stable service as an alternative for a message queue. For example, Rabbitmq helps us to keep the messages in the queue if they are not ACKed from the server. This support is considered especially for the case that the server is down because of some unexpected disasters like out of electricity or server panic.
 
-## How to Run
+## How To Run
 
 **Run server**
 ``` bash
@@ -40,6 +40,31 @@ make test
 
 *NOTE: If you don't want use swagger to test the service, you can add test cases in `${REPO}/test/unittest/matching_test.go`.*
 
+## How To Place An Buy/Sell Order Or Cancel An Order
+
+**Create Order Example**
+
+![](https://i.imgur.com/9tRJBxC.png)
+
+``` bash
+curl -X 'POST' \
+  'http://localhost:9000/api/v1/orders' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "order_kind": ${the_order_kind},
+  "price": ${the_price},
+  "price_type": ${the_price_type},
+  "quantity": ${the quantity}
+}'
+```
+
+**Cancel Order Example**
+``` bash
+curl -X 'DELETE' \
+  'http://localhost:9000/api/v1/orders/${the_order_id}' \
+  -H 'accept: application/json'
+```
 
 ## Service Architecture
 
