@@ -38,7 +38,7 @@ make rund
 make test
 ```
 
-*NOTE: If you don't want use swagger to test the service, you can add test cases in `${REPO}/test/unittest/matchingtest.go`.*
+*NOTE: If you don't want use swagger to test the service, you can add test cases in `${REPO}/test/unittest/matching_test.go`.*
 
 
 ## Service Architecture
