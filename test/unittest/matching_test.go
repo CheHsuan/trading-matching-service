@@ -136,10 +136,10 @@ func getTestCase1() *testCase {
 	return &testCase{
 		name: "2trade(limitXlimit,marketXmarket)",
 		ords: []interface{}{
-			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 100, ConfirmedAt: 1},
-			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 100, ConfirmedAt: 2},
-			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 110, ConfirmedAt: 1},
-			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeMarket, Quantity: 50, ConfirmedAt: 15},
+			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 100},
+			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 100},
+			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 110},
+			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeMarket, Quantity: 50},
 		},
 		expTrades: []*tradesvc.Trade{
 			{BuyOrderID: "B1", SellOrderID: "S1", Price: 10., Quantity: 100},
@@ -152,11 +152,11 @@ func getTestCase2() *testCase {
 	return &testCase{
 		name: "3trade(limitXlimit,marketXlimit,marketXlimit)",
 		ords: []interface{}{
-			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 100, ConfirmedAt: 1},
-			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 100, ConfirmedAt: 2},
-			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 110, ConfirmedAt: 3},
-			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 12., Quantity: 50, ConfirmedAt: 15},
-			&ordersvc.Order{ID: "S3", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 60, ConfirmedAt: 15},
+			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 100},
+			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 100},
+			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 110},
+			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 12., Quantity: 50},
+			&ordersvc.Order{ID: "S3", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 60},
 		},
 		expTrades: []*tradesvc.Trade{
 			{BuyOrderID: "B1", SellOrderID: "S1", Price: 10., Quantity: 100},
@@ -170,10 +170,10 @@ func getTestCase3() *testCase {
 	return &testCase{
 		name: "0trade(priceNotMatch)",
 		ords: []interface{}{
-			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 9., Quantity: 100, ConfirmedAt: 1},
-			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 110, ConfirmedAt: 1},
-			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 11., Quantity: 100, ConfirmedAt: 2},
-			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 13., Quantity: 50, ConfirmedAt: 15},
+			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 9., Quantity: 100},
+			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 110},
+			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 11., Quantity: 100},
+			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 13., Quantity: 50},
 		},
 		expTrades: []*tradesvc.Trade{},
 	}
@@ -183,9 +183,9 @@ func getTestCase4() *testCase {
 	return &testCase{
 		name: "1trade(buyLowerPrice)",
 		ords: []interface{}{
-			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 11., Quantity: 100, ConfirmedAt: 2},
-			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 9., Quantity: 50, ConfirmedAt: 15},
-			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 110, ConfirmedAt: 20},
+			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 11., Quantity: 100},
+			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 9., Quantity: 50},
+			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 110},
 		},
 		expTrades: []*tradesvc.Trade{
 			{BuyOrderID: "B1", SellOrderID: "S2", Price: 9., Quantity: 50},
@@ -198,9 +198,9 @@ func getTestCase5() *testCase {
 	return &testCase{
 		name: "2trade(buyEarlierFirstAndThenLatest)",
 		ords: []interface{}{
-			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 50, ConfirmedAt: 2},
-			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 50, ConfirmedAt: 15},
-			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 100, ConfirmedAt: 20},
+			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 50},
+			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10., Quantity: 50},
+			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 100},
 		},
 		expTrades: []*tradesvc.Trade{
 			{BuyOrderID: "B1", SellOrderID: "S1", Price: 10., Quantity: 50},
@@ -213,9 +213,9 @@ func getTestCase6() *testCase {
 	return &testCase{
 		name: "2trade(marketPriceFirst)",
 		ords: []interface{}{
-			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 11., Quantity: 50, ConfirmedAt: 2},
-			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 50, ConfirmedAt: 15},
-			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 11., Quantity: 100, ConfirmedAt: 20},
+			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 11., Quantity: 50},
+			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 50},
+			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 11., Quantity: 100},
 		},
 		expTrades: []*tradesvc.Trade{
 			{BuyOrderID: "B2", SellOrderID: "S1", Price: 11., Quantity: 50},
@@ -228,9 +228,9 @@ func getTestCase7() *testCase {
 	return &testCase{
 		name: "0trade(allMarKetPriceAndNoInitMarketPrice)",
 		ords: []interface{}{
-			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeMarket, Quantity: 50, ConfirmedAt: 2},
-			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeMarket, Quantity: 50, ConfirmedAt: 15},
-			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 100, ConfirmedAt: 20},
+			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeMarket, Quantity: 50},
+			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeMarket, Quantity: 50},
+			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 100},
 		},
 		expTrades: []*tradesvc.Trade{},
 	}
@@ -240,12 +240,12 @@ func getTestCase8() *testCase {
 	return &testCase{
 		name: "5trade(multipleLimits)",
 		ords: []interface{}{
-			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 350, ConfirmedAt: 2},
-			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 50, ConfirmedAt: 15},
-			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100, ConfirmedAt: 20},
-			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100, ConfirmedAt: 20},
-			&ordersvc.Order{ID: "B3", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100, ConfirmedAt: 20},
-			&ordersvc.Order{ID: "B4", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100, ConfirmedAt: 20},
+			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 350},
+			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 50},
+			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100},
+			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100},
+			&ordersvc.Order{ID: "B3", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100},
+			&ordersvc.Order{ID: "B4", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100},
 		},
 		expTrades: []*tradesvc.Trade{
 			{BuyOrderID: "B1", SellOrderID: "S1", Price: 10., Quantity: 100},
@@ -261,10 +261,10 @@ func getTestCase9() *testCase {
 	return &testCase{
 		name: "1trade(tradeAndCancel)",
 		ords: []interface{}{
-			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 350, ConfirmedAt: 2},
-			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100, ConfirmedAt: 10},
+			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 350},
+			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100},
 			&ordersvc.Cancel{OrderID: "S1", OrderKind: ordersvc.OrderKindSell},
-			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100, ConfirmedAt: 10},
+			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100},
 		},
 		expTrades: []*tradesvc.Trade{
 			{BuyOrderID: "B1", SellOrderID: "S1", Price: 10., Quantity: 100},
@@ -279,15 +279,15 @@ func getTestCase10() *testCase {
 	return &testCase{
 		name: "6trade(complicate)",
 		ords: []interface{}{
-			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 350, ConfirmedAt: 2},
-			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100, ConfirmedAt: 15},
-			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100, ConfirmedAt: 20},
-			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100, ConfirmedAt: 20},
-			&ordersvc.Order{ID: "B3", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 100, ConfirmedAt: 20},
-			&ordersvc.Order{ID: "B4", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100, ConfirmedAt: 25},
+			&ordersvc.Order{ID: "S1", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 350},
+			&ordersvc.Order{ID: "S2", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100},
+			&ordersvc.Order{ID: "B1", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100},
+			&ordersvc.Order{ID: "B2", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100},
+			&ordersvc.Order{ID: "B3", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 100},
+			&ordersvc.Order{ID: "B4", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeLimit, Price: 10, Quantity: 100},
 			&ordersvc.Cancel{OrderID: "S2", OrderKind: ordersvc.OrderKindSell},
-			&ordersvc.Order{ID: "B5", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 100, ConfirmedAt: 30},
-			&ordersvc.Order{ID: "S3", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeMarket, Quantity: 150, ConfirmedAt: 30},
+			&ordersvc.Order{ID: "B5", Kind: ordersvc.OrderKindBuy, PriceType: ordersvc.PriceTypeMarket, Quantity: 100},
+			&ordersvc.Order{ID: "S3", Kind: ordersvc.OrderKindSell, PriceType: ordersvc.PriceTypeMarket, Quantity: 150},
 		},
 		expTrades: []*tradesvc.Trade{
 			{BuyOrderID: "B1", SellOrderID: "S1", Price: 10., Quantity: 100},
